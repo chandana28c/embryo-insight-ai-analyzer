@@ -116,16 +116,18 @@ const AnalysisPanel: React.FC<AnalysisPanelProps> = ({
                   <h4 className="font-semibold text-blue-800">Confusion Matrix</h4>
                 </div>
                 <div className="grid grid-cols-3 gap-1 text-xs">
-                  {performanceMetrics.confusionMatrix.slice(0, 9).map((value, index) => (
-                    <div 
-                      key={index}
-                      className={`p-1 text-center rounded ${
-                        value > 50 ? 'bg-blue-200 text-blue-800' : 'bg-gray-100 text-gray-600'
-                      }`}
-                    >
-                      {value}
-                    </div>
-                  ))}
+                  {performanceMetrics.confusionMatrix.slice(0, 3).map((row, rowIndex) => 
+                    row.slice(0, 3).map((value, colIndex) => (
+                      <div 
+                        key={`${rowIndex}-${colIndex}`}
+                        className={`p-1 text-center rounded ${
+                          value > 30 ? 'bg-blue-200 text-blue-800' : 'bg-gray-100 text-gray-600'
+                        }`}
+                      >
+                        {value}
+                      </div>
+                    ))
+                  )}
                 </div>
                 <p className="text-sm text-blue-600 mt-2">
                   Classification matrix (truncated)
